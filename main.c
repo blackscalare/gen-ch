@@ -8,6 +8,7 @@
 #define HELP 1
 #define TOO_LONG 2
 #define MAX_FILE_NAME_LENGTH 64
+#define CONTENT_LENGTH 255
 
 char* to_upper(char* str) {
     char* upper_str = malloc(sizeof(char) * MAX_FILE_NAME_LENGTH);
@@ -36,11 +37,11 @@ void print_help(int type) {
 void h_file(char* name, char* h_file_content) {
     char* upper_name = to_upper(name);
 
-    snprintf(h_file_content, 1024, "#ifndef __%s_H\n#define __%s_H\n\n#endif\n", upper_name, upper_name);
+    snprintf(h_file_content, CONTENT_LENGTH, "#ifndef __%s_H\n#define __%s_H\n\n#endif\n", upper_name, upper_name);
 }
 
 void c_file(char* name, char* c_file_content) {
-    snprintf(c_file_content, 1024, "#include \"%s.h\"\n", name);
+    snprintf(c_file_content, CONTENT_LENGTH, "#include \"%s.h\"\n", name);
 }
 
 int main(int argc, char** argv) {
@@ -54,12 +55,14 @@ int main(int argc, char** argv) {
 
     char* name = argv[1];
 
-    char h_file_content[255];
+    char h_file_content[CONTENT_LENGTH];
     char h_file_name[MAX_FILE_NAME_LENGTH];
-    char c_file_content[255];
+    char c_file_content[CONTENT_LENGTH];
     char c_file_name[MAX_FILE_NAME_LENGTH];
+
     h_file(name, h_file_content);
     snprintf(h_file_name, MAX_FILE_NAME_LENGTH, "%s.h", name);
+    
     c_file(name, c_file_content);
     snprintf(c_file_name, MAX_FILE_NAME_LENGTH, "%s.c", name);
 
