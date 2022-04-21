@@ -11,7 +11,7 @@
 #define CONTENT_LENGTH 255
 
 char* to_upper(char* str) {
-    char* upper_str = malloc(sizeof(char) * MAX_FILE_NAME_LENGTH);
+    char* upper_str = malloc(sizeof(char) * strlen(str));
 
     for(int i = 0; str[i] != '\0'; ++i) {
         if(str[i] >= 'a' && str[i] <= 'z') {
